@@ -1,0 +1,272 @@
+' rB+ assets file.
+'
+' This is where we tell rB+ to load in our graphics and sounds etc.
+'
+' Firstly, all these lines are comments and are not useful to the build process.
+' To be exact, all lines starting with the characters ";", "#", "'", "*" are considered to be comments.
+' 
+' Each non-comment assets.txt line is considered to have 4 comma separated strings of text like the following:
+' A,B,C,D
+' | | | +-- Filename of the asset, relative to the project folder (i.e. assets\gfx\background.bmp)
+' | | +---- Tells the build process if the file should just be imported as is or some conversion is needed beforehand. See below for details.
+' | +------ Name asset which is exposed to rb+. Actually two variables are exposed to rb+: name and name_end which holds the start and end addresses of the asset.
+' |         Names may start with an uppercase or lowercase letter (A-Z a-z), an underscore (_), a question mark (?) or a period (.).
+' +-------- This should either be ABS or ROM. This tells the build process if you want the asset to be included in RAM or ROM.
+'
+' Parameter C explained further:
+' - This can be any text if you have some asset that you want imported in rb+ as is (for example a converted raw sample or a backdrop). For this you can put any text in C.
+' - For graphics conversion you can use "gfx_clut" or "gfx_noclut" to convert a .BMP file into jaguar raw format and optionally export the paletter or not (clut=yes, noclut=no).
+'   This applies to 1-, 2-, 4- and 8-bit graphics only.
+'   For 16-bit and 24-bit graphics no clut is created (because there isn't a need for one).
+'   Finally for 16-bit images you have to use gfx_clut16 or gfx_noclut16.
+' - For conversion to CRY mode use "gfx_cry".
+' - For audio files you can use "sfx_rawXXXXX" to convert any audio file (for example .wav, .mp3, .ogg, etc) into raw format.
+'   You can optionally set XXXXX to be the desired sample rate, otherwise 8000Hz is used by default.
+' - If you want the audio files to be compressed using u-law then use "sfx_mlawXXXX" instead (note - this requires Zerosquare's player!)
+' - Rmotion scripts should be placed here, use "rmotion".
+' - Finally, if you want an asset packed, append a "_pack" suffix. For example "gfx_noclut_pack". 
+'   Note that rmotion scripts and CLUTs aren't packed for now.
+'   Also note that it's your responsibility to reserve RAM for unpacking as well as running powaunpack to unpack the asset.
+'
+' That's all, have fun!
+'
+ROM,BMP_TRUFUN,gfx_clut_pack,assets\gfx\trufun.bmp
+ROM,BMP_DOTLAST,gfx_clut_pack,ASSETS\GFX\dotlast.BMP
+ROM,BMP_TITLESCREEN,gfx_clut_pack,assets\gfx\title_screen.bmp
+ROM,BMP_PREALPHA,gfx_clut_pack,assets\gfx\prealpha.bmp
+ROM,BMP_CHOOSEFIGHTER,gfx_clut_pack,assets\gfx\choose_your_fighter.bmp
+ROM,BMP_BATTLESCREEN,gfx_clut_pack,assets\gfx\battle_screen.bmp
+ROM,BMP_P1_SELECTOR,gfx_clut,ASSETS\GFX\p1_selector.BMP
+ROM,BMP_P2_SELECTOR,gfx_clut,ASSETS\GFX\p2_selector.BMP
+ROM,BMP_P2_SELECTOR_FLASH,gfx_clut,ASSETS\GFX\p2_selector_flash.BMP
+ROM,BMP_BATTLE_COURTYARD,gfx_clut,ASSETS\GFX\battle_courtyard.BMP
+ROM,BMP_BATTLE_GATES,gfx_clut,ASSETS\GFX\battle_gates.BMP
+ROM,BMP_BATTLE_THEPIT,gfx_clut,ASSETS\GFX\battle_thepit.BMP
+ROM,BMP_BATTLE_WARRIOR,gfx_clut,ASSETS\GFX\battle_warrior.BMP
+ROM,BMP_BATTLE_THRONE,gfx_clut,ASSETS\GFX\battle_throne.BMP
+ROM,BMP_BATTLE_GORO,gfx_clut,ASSETS\GFX\battle_goro.BMP
+ROM,BMPCAGE,gfx_clut,ASSETS\GFX\cage.BMP
+ROM,BMPKANG,gfx_clut,ASSETS\GFX\liukang.BMP
+ROM,BMPRAIDEN,gfx_clut,ASSETS\GFX\raiden.BMP
+ROM,BMPSUBZERO,gfx_clut,ASSETS\GFX\subzero.BMP
+ROM,BMPSONYA,gfx_clut,ASSETS\GFX\sonya.BMP
+ROM,BMPKANO,gfx_clut,ASSETS\GFX\kano.BMP
+'ROM,BMPGORO,gfx_clut_pack,ASSETS\GFX\goro_placeholder.BMP
+ROM,PAL_SCORPION,gfx_clut,ASSETS\GFX\pal_scorpion.BMP
+ROM,PAL_REPTILE,gfx_clut,ASSETS\GFX\pal_reptile.BMP
+ROM,PAL_KASUMI,gfx_clut,ASSETS\GFX\pal_kasumi.BMP
+ROM,BMP_LIGHTNING,gfx_clut,ASSETS\GFX\lightning.BMP
+ROM,BMP_PT_CAGE,gfx_clut,ASSETS\GFX\pt_cage.BMP
+ROM,BMP_PT_KANO,gfx_clut,ASSETS\GFX\pt_kano.BMP
+ROM,BMP_PT_KANG,gfx_clut,ASSETS\GFX\pt_liukang.BMP
+ROM,BMP_PT_RAIDEN,gfx_clut,ASSETS\GFX\pt_raiden.BMP
+ROM,BMP_PT_SCORPION,gfx_clut,ASSETS\GFX\pt_scorpion.BMP
+ROM,BMP_PT_SONYA,gfx_clut,ASSETS\GFX\pt_sonya.BMP
+ROM,BMP_PT_SUBZERO,gfx_clut,ASSETS\GFX\pt_subzero.BMP
+ROM,BMP_PT_KASUMI,gfx_clut,ASSETS\GFX\pt_kasumi.BMP
+ROM,BMP_PIT_BACKGROUND,gfx_clut_pack,assets\gfx\stage_pit_background.bmp
+ROM,BMP_PIT_BOTTOM,gfx_clut_pack,assets\gfx\stage_pit_bottom.bmp
+ROM,BMP_PIT_SPIKES,gfx_clut,assets\gfx\stage_pit_spikes.bmp
+ROM,BMP_PIT_MOON,gfx_clut_pack,assets\gfx\stage_pit_moon.bmp
+ROM,BMP_PIT_CLOUDS1,gfx_clut,assets\gfx\stage_pit_clouds1.bmp
+ROM,BMP_PIT_CLOUDS2,gfx_clut,assets\gfx\stage_pit_clouds2.bmp
+ROM,BMP_PIT_CLOUDS3,gfx_clut,assets\gfx\stage_pit_clouds3.bmp
+ROM,BMP_THRONE_BACKGROUND,gfx_clut_pack,assets\gfx\stage_throne_background.bmp
+ROM,BMP_THRONE_SHANG,gfx_clut,assets\gfx\stage_throne_shang.bmp
+ROM,BMP_WARRIOR_BACKGROUND,gfx_clut_pack,assets\gfx\stage_warrior_background.bmp
+ROM,BMP_WARRIOR_BUSH,gfx_clut,assets\gfx\stage_warrior_bush.bmp
+ROM,BMP_WARRIOR_PILLAR,gfx_clut,assets\gfx\stage_warrior_pillar.bmp
+ROM,BMP_GORO_BACKGROUND,gfx_clut_pack,assets\gfx\stage_goro_background.bmp
+ROM,BMP_GORO_PARALAX,gfx_clut_pack,assets\gfx\stage_goro_paralax.bmp
+ROM,BMP_GORO_EYES,gfx_clut,assets\gfx\stage_goro_eyes.bmp
+ROM,BMP_COURTYARD_BACKGROUND,gfx_clut_pack,assets\gfx\stage_courtyard_background.bmp
+ROM,BMP_COURTYARD_PARALAX,gfx_clut_pack,assets\gfx\stage_courtyard_parallax.bmp
+ROM,BMP_COURTYARD_MONKS,gfx_clut,assets\gfx\stage_courtyard_monks.bmp
+ROM,BMP_PALACE_BACKGROUND,gfx_clut_pack,assets\gfx\stage_palace_background.bmp
+ROM,BMP_PALACE_PARALAX,gfx_clut_pack,assets\gfx\stage_palace_paralax.bmp
+ROM,BMP_PALACE_CLOUDS1,gfx_clut,assets\gfx\stage_palace_clouds1.bmp
+ROM,BMP_PALACE_CLOUDS2,gfx_clut,assets\gfx\stage_palace_clouds2.bmp
+ROM,BMP_FLAME,gfx_clut,assets\gfx\flame.bmp
+ROM,BMP_HITBOX,gfx_clut,ASSETS\GFX\hitbox_on.BMP
+ROM,BMP_HITBOX_ATTACK,gfx_clut,ASSETS\GFX\hitbox_attack_on.BMP
+ROM,BMP_HITBOX_OFF,gfx_clut,ASSETS\GFX\hitbox_off.BMP
+ROM,BMP_HITBOX_ATTACK_OFF,gfx_clut,ASSETS\GFX\hitbox_attack_off.BMP
+ROM,BMP_MATCH,gfx_clut,ASSETS\GFX\match.BMP
+ROM,BMP_BLOOD_RED,gfx_clut,ASSETS\GFX\blood_red.BMP
+ROM,BMP_PAL_BLOOD,gfx_clut,ASSETS\GFX\pal_blood.BMP
+ROM,BMP_HEALTHBAR_OFF,gfx_clut,ASSETS\GFX\healthbar_off.BMP
+ROM,BMP_HEALTHBAR,gfx_clut,ASSETS\GFX\healthbar.BMP
+ROM,BMP_TESTYOURMIGHT_STONE,gfx_clut,ASSETS\GFX\testyourmight_stone.BMP
+ROM,BMP_TS_BACKGROUND,gfx_clut_pack,ASSETS\GFX\ts_background.BMP
+ROM,BMP_TS_FIGHTERS1,gfx_noclut,ASSETS\GFX\ts_fighters1.BMP
+ROM,BMP_TS_FIGHTERS2,gfx_noclut,ASSETS\GFX\ts_fighters2.BMP
+ROM,BMP_CHOOSE_KASUMI,gfx_noclut,ASSETS\GFX\choose_kasumi.BMP
+ROM,BMP_TS_MENU1,gfx_clut,ASSETS\GFX\ts_menu1.BMP
+ROM,BMP_TS_MENU2,gfx_clut,ASSETS\GFX\ts_menu2.BMP
+ROM,BMP_TS_MENU3,gfx_clut,ASSETS\GFX\ts_menu3.BMP
+ROM,BMP_PROJECTILES,gfx_clut,ASSETS\GFX\projectiles.bmp
+ROM,BMP_PAL_CAGE_SHADOW,gfx_clut,ASSETS\GFX\pal_cage_shadow.BMP
+ROM,BMP_PAL_PROJ_CAGE,gfx_clut,ASSETS\GFX\pal_proj_cage.bmp
+ROM,BMP_PAL_PROJ_KANO,gfx_clut,ASSETS\GFX\pal_proj_kano.bmp
+ROM,BMP_PAL_PROJ_RAIDEN,gfx_clut,ASSETS\GFX\pal_proj_raiden.bmp
+ROM,BMP_PAL_PROJ_KANG,gfx_clut,ASSETS\GFX\pal_proj_kang.bmp
+ROM,BMP_PAL_PROJ_SONYA,gfx_clut,ASSETS\GFX\pal_proj_sonya.bmp
+ROM,BMP_PAL_PROJ_SUBZERO,gfx_clut,ASSETS\GFX\pal_proj_subzero.bmp
+ROM,BMP_PAL_PROJ_SCORPION,gfx_clut,ASSETS\GFX\pal_proj_scorpion.bmp
+ROM,BMP_PAL_PROJ_KASUMI,gfx_clut,ASSETS\GFX\pal_proj_kasumi.bmp
+ROM,BMP_PAL_FROZEN_SCORPION,gfx_clut,ASSETS\GFX\pal_frozen_scorpion.bmp
+ROM,BMP_PAL_FROZEN_CAGE,gfx_clut,ASSETS\GFX\pal_frozen_cage.bmp
+ROM,BMP_PAL_FROZEN_KANO,gfx_clut,ASSETS\GFX\pal_frozen_kano.bmp
+ROM,BMP_PAL_FROZEN_RAIDEN,gfx_clut,ASSETS\GFX\pal_frozen_raiden.bmp
+ROM,BMP_PAL_FROZEN_SUBZERO,gfx_clut,ASSETS\GFX\pal_frozen_subzero.bmp
+ROM,BMP_PAL_FROZEN_SONYA,gfx_clut,ASSETS\GFX\pal_frozen_sonya.bmp
+ROM,BMP_PAL_FROZEN_KANG,gfx_clut,ASSETS\GFX\pal_frozen_kang.bmp
+ROM,BMP_PAL_SCORPION_TELEPORT,gfx_clut,ASSETS\GFX\pal_scorpion_teleport.bmp
+ROM,BMP_PAL_FRONT_DECAP_CAGE,gfx_clut,ASSETS\GFX\pal_front_decap_cage.bmp
+ROM,BMP_PAL_FRONT_DECAP_KANO,gfx_clut,ASSETS\GFX\pal_front_decap_kano.bmp
+ROM,BMP_PAL_FRONT_DECAP_RAIDEN,gfx_clut,ASSETS\GFX\pal_front_decap_raiden.bmp
+ROM,BMP_PAL_FRONT_DECAP_KANG,gfx_clut,ASSETS\GFX\pal_front_decap_kang.bmp
+ROM,BMP_PAL_FRONT_DECAP_SUBZERO,gfx_clut,ASSETS\GFX\pal_front_decap_subzero.bmp
+ROM,BMP_PAL_FRONT_DECAP_SCORPION,gfx_clut,ASSETS\GFX\pal_front_decap_scorpion.bmp
+ROM,BMP_PAL_FRONT_DECAP_REPTILE,gfx_clut,ASSETS\GFX\pal_front_decap_reptile.bmp
+ROM,BMP_PAL_FRONT_DECAP_SONYA,gfx_clut,ASSETS\GFX\pal_front_decap_sonya.bmp
+ROM,BMP_PAL_FRONT_DECAP_KASUMI,gfx_clut,ASSETS\GFX\pal_front_decap_kasumi.bmp
+ROM,BMP_PAL_DECAP_CAGE,gfx_clut,ASSETS\GFX\pal_decap_cage.bmp
+ROM,BMP_PAL_DECAP_KANO,gfx_clut,ASSETS\GFX\pal_decap_kano.bmp
+ROM,BMP_PAL_DECAP_RAIDEN,gfx_clut,ASSETS\GFX\pal_decap_raiden.bmp
+ROM,BMP_PAL_DECAP_KANG,gfx_clut,ASSETS\GFX\pal_decap_kang.bmp
+ROM,BMP_PAL_DECAP_SUBZERO,gfx_clut,ASSETS\GFX\pal_decap_subzero.bmp
+ROM,BMP_PAL_DECAP_SCORPION,gfx_clut,ASSETS\GFX\pal_decap_scorpion.bmp
+ROM,BMP_PAL_DECAP_SONYA,gfx_clut,ASSETS\GFX\pal_decap_sonya.bmp
+ROM,BMP_PAL_DECAP_KASUMI,gfx_clut,ASSETS\GFX\pal_decap_kasumi.bmp
+ROM,BMP_PAL_KANO_HEART,gfx_clut,ASSETS\GFX\pal_kano_heart.bmp
+ROM,BMP_FMV_BACKGROUND,gfx_clut_pack,ASSETS\GFX\fmv_background.BMP
+ROM,BMP_FMV_CAGE,gfx_clut_pack,ASSETS\GFX\fmv_cage.BMP
+ROM,BMP_FMV_KANO,gfx_clut_pack,ASSETS\GFX\fmv_kano.BMP
+ROM,BMP_FMV_RAIDEN,gfx_clut_pack,ASSETS\GFX\fmv_raiden.BMP
+ROM,BMP_FMV_KANG,gfx_clut_pack,ASSETS\GFX\fmv_kang.BMP
+ROM,BMP_FMV_SCORPION,gfx_clut_pack,ASSETS\GFX\fmv_scorpion.BMP
+ROM,BMP_FMV_SUBZERO,gfx_clut_pack,ASSETS\GFX\fmv_subzero.BMP
+ROM,BMP_FMV_SONYA,gfx_clut_pack,ASSETS\GFX\fmv_sonya.BMP
+ROM,BMP_FMV_KASUMI,gfx_clut_pack,ASSETS\GFX\fmv_kasumi.BMP
+ROM,BMP_ATTRACT_LEADERBOARD,gfx_clut_pack,ASSETS\GFX\attract_leaderboard.BMP
+ROM,BMP_ATTRACT_GORO,gfx_clut_pack,ASSETS\GFX\attract_goro.BMP
+ROM,BMP_ATTRACT_SHANGTSUNG,gfx_clut_pack,ASSETS\GFX\attract_shangtsung.BMP
+ROM,BMP_ATTRACT_WINNERS,gfx_clut_pack,ASSETS\GFX\attract_winners.BMP
+'ROM,BMP_ATTRACT_REAL,gfx_clut_pack,ASSETS\GFX\attract_real.BMP
+ROM,BMP_BATTLEPLAN,gfx_clut,ASSETS\GFX\battleplan.BMP
+ROM,BMP_BATTLEPLAN_TOP,gfx_clut,ASSETS\GFX\battleplan_top.BMP
+ROM,BMP_BATTLEPLAN_BOTTOM,gfx_clut,ASSETS\GFX\battleplan_bottom.BMP
+ROM,BMP_BATTLEPLAN_INTERSECTION,gfx_clut,ASSETS\GFX\battleplan_intersection.BMP
+ROM,BMP_BATTLEPLAN_ENDURANCE,gfx_clut,ASSETS\GFX\battleplan_endurance.BMP
+ROM,BMP_BATTLEPLAN_SINGLE,gfx_clut,ASSETS\GFX\battleplan_single.BMP
+ROM,BMP_BATTLEPLAN_SHANGTSUNG,gfx_clut,ASSETS\GFX\battleplan_shangtsung.BMP
+ROM,BMP_BATTLEPLAN_GORO,gfx_clut,ASSETS\GFX\battleplan_goro.BMP
+ROM,BMP_BATTLEPLAN_MARKER,gfx_clut,ASSETS\GFX\battleplan_marker.BMP
+ROM,BMP_BATTLEPLAN_PORTRAITS,gfx_clut,ASSETS\GFX\battleplan_portraits.BMP
+ROM,BMP_ENDINGS_PORTRAITS,gfx_clut_pack,ASSETS\GFX\endings_portraits.BMP
+
+ROM,p1cursor_sam,sfx_raw8000,ASSETS\SFX\p1cursor.wav
+ROM,p2cursor_sam,sfx_raw8000,ASSETS\SFX\p2cursor.wav
+ROM,johnnycage_sam,sfx_raw8000,ASSETS\SFX\johnnycage.wav
+ROM,kano_sam,sfx_raw8000,ASSETS\SFX\kano.wav
+ROM,raiden_sam,sfx_raw8000,ASSETS\SFX\raiden.wav
+ROM,raiden_lightning_sam,sfx_raw8000,ASSETS\SFX\raiden_lightning.wav
+ROM,raiden_lightning_end_sam,sfx_raw8000,ASSETS\SFX\raiden_lightning_end.wav
+ROM,liukang_sam,sfx_raw8000,ASSETS\SFX\liukang.wav
+ROM,scorpion_sam,sfx_raw8000,ASSETS\SFX\scorpion.wav
+ROM,subzero_sam,sfx_raw8000,ASSETS\SFX\subzero.wav
+ROM,kasumi_sam,sfx_raw8000,ASSETS\SFX\kasumi.wav
+ROM,sonya_sam,sfx_raw8000,ASSETS\SFX\sonya.wav
+ROM,fight_sam,sfx_raw8000,ASSETS\SFX\fight_16.wav
+ROM,intro_sam,sfx_raw8000,ASSETS\SFX\intro.wav
+ROM,hiya_female1_sam,sfx_raw8000,ASSETS\SFX\hiya_female1.wav
+ROM,hiya_female2_sam,sfx_raw8000,ASSETS\SFX\hiya_female2.wav
+ROM,hiya_male1_sam,sfx_raw8000,ASSETS\SFX\hiya_male1.wav
+ROM,hiya_male2_sam,sfx_raw8000,ASSETS\SFX\hiya_male2.wav
+ROM,hiya_kang1_sam,sfx_raw8000,ASSETS\SFX\hiya_kang1.wav
+ROM,hiya_kang2_sam,sfx_raw8000,ASSETS\SFX\hiya_kang2.wav
+ROM,hiya_ninja1_sam,sfx_raw8000,ASSETS\SFX\hiya_ninja1.wav
+ROM,hiya_ninja2_sam,sfx_raw8000,ASSETS\SFX\hiya_ninja2.wav
+ROM,block01_sam,sfx_raw8000,ASSETS\SFX\block01_16.wav
+ROM,block02_sam,sfx_raw8000,ASSETS\SFX\block02_16.wav
+ROM,groan_male01_sam,sfx_raw8000,ASSETS\SFX\groan_male01.wav
+ROM,groan_male02_sam,sfx_raw8000,ASSETS\SFX\groan_male02.wav
+ROM,groan_female01_sam,sfx_raw8000,ASSETS\SFX\groan_female01.wav
+ROM,groan_female02_sam,sfx_raw8000,ASSETS\SFX\groan_female02.wav
+ROM,hit_01_sam,sfx_raw8000,ASSETS\SFX\hit_01.wav
+ROM,hit_02_sam,sfx_raw8000,ASSETS\SFX\hit_02.wav
+ROM,hit_impact_sam,sfx_raw8000,ASSETS\SFX\hit_impact.wav
+ROM,swing_01_sam,sfx_raw8000,ASSETS\SFX\swing_01.wav
+ROM,swing_02_sam,sfx_raw8000,ASSETS\SFX\swing_02.wav
+ROM,blood01_sam,sfx_raw8000,ASSETS\SFX\blood01.wav
+ROM,blood02_sam,sfx_raw8000,ASSETS\SFX\blood02.wav
+ROM,yell_male01_sam,sfx_raw8000,ASSETS\SFX\yell_male01.wav
+ROM,yell_male02_sam,sfx_raw8000,ASSETS\SFX\yell_male02.wav
+ROM,yell_female_sam,sfx_raw8000,ASSETS\SFX\yell_female.wav
+ROM,yell_kang_sam,sfx_raw8000,ASSETS\SFX\yell_kang.wav
+ROM,jump_male_sam,sfx_raw8000,ASSETS\SFX\jump_male.wav
+ROM,jump_female_sam,sfx_raw8000,ASSETS\SFX\jump_female.wav
+ROM,jump_ninja_sam,sfx_raw8000,ASSETS\SFX\jump_ninja.wav
+ROM,jump_roll_sam,sfx_raw8000,ASSETS\SFX\jump_roll.wav
+ROM,thud_sam,sfx_raw8000,ASSETS\SFX\thud.wav
+ROM,crowd_aww_sam,sfx_raw8000,ASSETS\SFX\crowd_aww.wav
+ROM,announcer_excellent_sam,sfx_raw8000,ASSETS\SFX\announcer_excellent.wav
+ROM,announcer_laugh_sam,sfx_raw8000,ASSETS\SFX\announcer_laugh.wav
+ROM,finish_her_sam,sfx_raw8000,ASSETS\SFX\finish_her.wav
+ROM,finish_him_sam,sfx_raw8000,ASSETS\SFX\finish_him.wav
+ROM,wins_sam,sfx_raw8000,ASSETS\SFX\wins.wav
+ROM,flawless_sam,sfx_raw8000,ASSETS\SFX\flawless.wav
+ROM,fatality_sam,sfx_raw8000,ASSETS\SFX\fatality.wav
+ROM,cage_yeah_sam,sfx_raw8000,ASSETS\SFX\cage_yeah.wav
+ROM,cage_greenbolt_sam,sfx_raw8000,ASSETS\SFX\cage_greenbolt.wav
+ROM,kano_knife_sam,sfx_raw8000,ASSETS\SFX\kano_knife.wav
+ROM,sonya_rings_sam,sfx_raw8000,ASSETS\SFX\sonya_rings.wav
+ROM,subzero_freeze_sam,sfx_raw8000,ASSETS\SFX\subzero_freeze.wav
+ROM,subzero_freeze_end_sam,sfx_raw8000,ASSETS\SFX\subzero_freeze_end.wav
+ROM,scorpion_harpoon_sam,sfx_raw8000,ASSETS\SFX\scorpion_harpoon.wav
+ROM,scorpion_comehere_sam,sfx_raw8000,ASSETS\SFX\scorpion_comehere.wav
+ROM,scorpion_getoverhere_sam,sfx_raw8000,ASSETS\SFX\scorpion_getoverhere.wav
+ROM,kano_yell_sam,sfx_raw8000,ASSETS\SFX\kano_yell.wav
+ROM,kano_headbutt_sam,sfx_raw8000,ASSETS\SFX\kano_headbutt.wav
+ROM,throw_male_sam,sfx_raw8000,ASSETS\SFX\throw_male.wav
+ROM,throw_female_sam,sfx_raw8000,ASSETS\SFX\throw_female.wav
+ROM,throw_ninja_sam,sfx_raw8000,ASSETS\SFX\throw_ninja.wav
+ROM,trufun_sam,sfx_raw8000,ASSETS\SFX\trufun.wav
+ROM,title_thud_sam,sfx_raw8000,ASSETS\SFX\title_thud.wav
+ROM,title_start_sam,sfx_raw8000,ASSETS\SFX\title_start.wav
+ROM,crowd_clap_sam,sfx_raw8000,ASSETS\SFX\crowd_clap.wav
+ROM,kano_cannonball_sam,sfx_raw8000,ASSETS\SFX\kano_cannonball.wav
+ROM,kano_cannonball_start_sam,sfx_raw8000,ASSETS\SFX\kano_cannonball_start.wav
+ROM,raiden_teleport_sam,sfx_raw8000,ASSETS\SFX\raiden_teleport.wav
+ROM,raiden_torpedo_sam,sfx_raw8000,ASSETS\SFX\raiden_torpedo.wav
+ROM,raiden_headzap_sam,sfx_raw8000,ASSETS\SFX\raiden_headzap.wav
+ROM,raiden_idle_zap_sam,sfx_raw8000,ASSETS\SFX\raiden_idle_zap.wav
+ROM,kang_flyingkick_sam,sfx_raw8000,ASSETS\SFX\kang_flyingkick.wav
+ROM,scorpion_teleport_sam,sfx_raw8000,ASSETS\SFX\scorpion_teleport.wav
+ROM,subzero_slide_sam,sfx_raw8000,ASSETS\SFX\subzero_slide.wav
+ROM,kasumi_fireball_sam,sfx_raw8000,ASSETS\SFX\kasumi_fireball.wav
+ROM,fatality_gong_sam,sfx_raw8000,ASSETS\SFX\fatality_gong.wav
+ROM,fatality_groan_male_sam,sfx_raw8000,ASSETS\SFX\fatality_groan_male.wav
+ROM,fatality_groan_female_sam,sfx_raw8000,ASSETS\SFX\fatality_groan_female.wav
+ROM,fatality_groan_kang_sam,sfx_raw8000,ASSETS\SFX\fatality_groan_kang.wav
+ROM,kano_heartbeat_sam,sfx_raw8000,ASSETS\SFX\kano_heartbeat.wav
+ROM,kano_heartrip_sam,sfx_raw8000,ASSETS\SFX\kano_heartrip.wav
+ROM,kang_fatality_sam,sfx_raw8000,ASSETS\SFX\kang_fatality.wav
+ROM,scorpion_skull_sam,sfx_raw8000,ASSETS\SFX\scorpion_skull.wav
+ROM,scorpion_skull_flame_sam,sfx_raw8000,ASSETS\SFX\scorpion_skull_flame.wav
+ROM,fatality_scream_male_sam,sfx_raw8000,ASSETS\SFX\fatality_scream_male.wav
+ROM,fatality_scream_female_sam,sfx_raw8000,ASSETS\SFX\fatality_scream_female.wav
+ROM,sonya_kiss_sam,sfx_raw8000,ASSETS\SFX\sonya_kiss.wav
+ROM,pit_fall_sam,sfx_raw8000,ASSETS\SFX\pit_fall.wav
+ROM,pit_land_sam,sfx_raw8000,ASSETS\SFX\pit_land.wav
+
+ROM,MOD_TITLE,modfile1,ASSETS\Music\mk_title.mod
+ROM,MOD_STAGE_COURTYARD,modfile1,ASSETS\Music\stage_courtyard.mod
+ROM,MOD_STAGE_GATES,modfile1,ASSETS\Music\stage_gates.mod
+ROM,MOD_STAGE_PIT,modfile1,ASSETS\Music\stage_pit.mod
+ROM,MOD_STAGE_WARRIOR,modfile1,ASSETS\Music\stage_warrior.mod
+ROM,MOD_STAGE_GORO,modfile1,ASSETS\Music\stage_goro.mod
+ROM,MOD_STAGE_THRONE,modfile1,ASSETS\Music\stage_throne.mod
+' End of file.
+
